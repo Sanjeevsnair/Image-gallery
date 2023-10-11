@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Gallery</title>
+    <style>
+        /* Add your CSS styles for the gallery here */
+    </style>
+</head>
+<body>
+    <div id="imageGallery">
+        <!-- Your gallery images will be displayed here -->
+    </div>
+    <script>
+        // JavaScript code for creating the gallery
+        const images = [
+            '1.jpg',
+            '2.jpg',
+            '3.jpg','4.jpg','5.jpg','6.jpg',
+            // Add more image URLs here
+        ];
+
+        const gallery = document.getElementById('imageGallery');
+
+        function createGallery(images) {
+            for (let i = 0; i < images.length; i++) {
+                const image = document.createElement('img');
+                image.src = images[i];
+                image.alt = 'Image ' + (i + 1);
+                // You can add event listeners for image clicks here
+                gallery.appendChild(image);
+            }
+        }
+
+        createGallery(images);
+    </script>
+</body>
+</html>
