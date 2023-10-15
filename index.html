@@ -1,41 +1,114 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Image Gallery</title>
-    <style>
-        img {
-    max-width: 100%;
-    height: auto;
-        }
-        /* Add your CSS styles for the gallery here */
-    </style>
-</head>
-<body>
-    <div id="imageGallery">
-        <!-- Your gallery images will be displayed here -->
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Image gallery</title>
+
+    
+    
+  </head>
+  <style>h1 {
+  font-family: helvetica, arial, sans-serif;
+  text-align: center;
+}
+
+body {
+  width: 640px;
+  margin: 0 auto;
+}
+
+.full-img {
+  position: relative;
+  display: block;
+  width: 640px;
+  height: 480px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 640px;
+  height: 480px;
+  background-color: rgba(0,0,0,0);
+}
+
+button {
+  border: 0;
+  background: rgba(150,150,150,0.6);
+  text-shadow: 1px 1px 1px white;
+  border: 1px solid #999;
+  position: absolute;
+  cursor: pointer;
+  top: 2px;
+  left: 2px;
+}
+
+.thumb-bar img {
+  display: block;
+  width: 20%;
+  float: left;
+  cursor: pointer;
+}
+  </style>
+  <body>
+    <h1>Image gallery example</h1>
+
+    <div class="full-img">
+      <img class="displayed-img" src="Images/pic5.jpg" alt="Closeup of a human eye">
+      <div class="overlay"></div>
+      <button class="dark">Darken</button>
+    </div>
+
+    <div class="thumb-bar">
+
+
     </div>
     <script>
-        // JavaScript code for creating the gallery
-        const images = [
-            '1.jpg',
-            '2.jpg',
-            '3.jpg','4.jpg','5.jpg','6.jpg',
-            // Add more image URLs here
-        ];
+const imageFilenames = ['pic1.jpg', 'pic2.jpg', 'pic3.jpg', 'pic4.jpg', 'pic5.jpg'];
 
-        const gallery = document.getElementById('imageGallery');
 
-        function createGallery(images) {
-            for (let i = 0; i < images.length; i++) {
-                const image = document.createElement('img');
-                image.src = images[i];
-                image.alt = 'Image ' + (i + 1);
-                // You can add event listeners for image clicks here
-                gallery.appendChild(image);
-            }
-        }
+const imageAltText = {
+  'pic1.jpg': 'Closeup of a blue human eye',
+  'pic2.jpg': 'A mountain landscape',
+  'pic3.jpg': 'White and purple flowers',
+  'pic4.jpg': 'A wall painting',
+  'pic5.jpg': 'A Yellow butterfly'
+};
 
-        createGallery(images);
-    </script>
-</body>
+
+const thumbBar = document.querySelector('.thumb-bar');
+
+for (let i = 0; i < imageFilenames.length; i++) {
+  const newImage = document.createElement('img');
+  newImage.setAttribute('src', 'Images/' + imageFilenames[i]);
+  newImage.setAttribute('alt', imageAltText[imageFilenames[i]]);
+  thumbBar.appendChild(newImage);
+  
+  newImage.addEventListener('click', function() {
+    const displayedImage = document.querySelector('.displayed-img');
+    displayedImage.setAttribute('src', 'Images/' + imageFilenames[i]);
+    displayedImage.setAttribute('alt', imageAltText[imageFilenames[i]]);
+  });
+}
+
+
+const btn = document.querySelector('button');
+const overlay = document.querySelector('.overlay');
+
+btn.addEventListener('click', function() {
+  const currentClass = btn.getAttribute('class');
+  if (currentClass === 'dark') {
+    btn.setAttribute('class', 'light');
+    btn.textContent = 'Lighten';
+    overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+  } else {
+    btn.setAttribute('class', 'dark');
+    btn.textContent = 'Darken';
+    overlay.style.backgroundColor = 'rgba(0,0,0,0)';
+  }
+});
+</script>
+  </body>
 </html>
